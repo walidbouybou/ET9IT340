@@ -1,10 +1,7 @@
-const PatientService = require ( "./patientService");
+const PatientService = require('./patientService');
 
-const patientService = new PatientService();
+PatientService.addPatient('John', 'Doe');
 
-patientService.addPatient("Dupont", "Jean");
-
-const patient = patientService.getPatient(1);
+const patient = PatientService.getPatient(1);
 
 console.log(patient);
-

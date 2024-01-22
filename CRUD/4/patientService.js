@@ -1,9 +1,11 @@
-const   Patient = require  ("./patient");
-const PatientDAO  = require ( "./patientDAO");
+const Patient = require('./patient');
+const PatientDAO = require('./patientDAO');
+const database = require('./database');
 
-export default class PatientService {
+class PatientService {
   static addPatient(lastName, firstName) {
     const patient = new Patient({
+      id: database.patients.length + 1, 
       lastName,
       firstName,
       creationDate: new Date(),
@@ -13,11 +15,20 @@ export default class PatientService {
   }
 
   static getPatient(id) {
-    return PatientDAO.retrievePatient(id);
+    const retrievedPatient = PatientDAO.retrievePatient(id);
+
+    if (retrievedPatient) {
+      return {
+        id: retrievedPatient.id,
+        lastName: retrievedPatient.lastName,
+        firstName: retrievedPatient.firstName,
+        creationDate: retrievedPatient.creationDate,
+        
+      };
+    }
+
+    return null;
   }
-} 
-module.exports = {
-    addPatient,
-    getPatient,
-    getPatientList,
-};
+}
+
+module.exports = PatientService;

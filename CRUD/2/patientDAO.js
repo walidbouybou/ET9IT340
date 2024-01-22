@@ -1,16 +1,14 @@
-
 const Patient = require('./patient');
 const database = require('./database');
 
 function insertPatient(patient) {
-    const { lastName, firstName } = patient;
+    const { id, lastName, firstName } = patient;
 
-    const newPatient = new Patient( lastName, firstName, new Date());
+    const newPatient = new Patient(id, lastName, firstName, new Date());
 
     database.patients.push(newPatient);
 
-    console.log(database.patient);
-
+    console.log(database.patients);
 }
 
 function retrievePatientList() {
@@ -22,7 +20,6 @@ function retrievePatientList() {
 
     return patientsWithoutDates;
 }
-
 
 module.exports = {
     insertPatient: insertPatient,

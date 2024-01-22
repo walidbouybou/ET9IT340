@@ -1,8 +1,6 @@
-const database = require('./database');
-
 const patientService = require('./patientService');
 
-patientService.addPatient('Doe', 'John');
+patientService.addPatient(123456, 'Doe', 'John');
 
 const patientsList = patientService.getPatientList();
-console.log(patientsList);
+

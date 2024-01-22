@@ -1,22 +1,26 @@
-const  database= require  ("./database");
+const database = require('./database');
+const Patient = require('./patient');
 
-export default class PatientDAO {
+class PatientDAO {
   static insertPatient(patient) {
-    database.patient.push(patient);
-    console.log(database.patient);
+    database.patients.push(patient);
+    
   }
 
   static retrievePatient(id) {
-    const patient = database.patient.find((patient) => patient.id === id);
+    const patient = database.patients.find((patient) => patient.id === id);
 
     if (patient) {
-      patient.name = patient.lastName + " " + patient.firstName;
+      return new Patient({
+        id: patient.id,
+        lastName: patient.lastName,
+        firstName: patient.firstName,
+        creationDate: patient.creationDate,
+      });
     }
 
-    return patient;
+    return null;
   }
-} 
-module.exports = {
-    retrievePatient,
+}
 
-};
+module.exports = PatientDAO;

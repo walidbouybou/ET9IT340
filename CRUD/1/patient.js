@@ -1,4 +1,3 @@
-
 class Patient {
     constructor(id, lastName, firstName, creationDate) {
       this.id = id;

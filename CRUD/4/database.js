@@ -1,5 +1,5 @@
-export default{
-  patient: [],
-}
+const database = {
+  patients: []
+};
 
-  
+module.exports = database;
