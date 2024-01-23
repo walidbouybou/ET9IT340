@@ -2,6 +2,7 @@ const Patient = require('./patient');
 const database = require('./database');
 const { patientCache } = require('./cache');
 const PatientDAO = require('./patientDAO');
+const { addEvent } = require('./eventStore');
 
 class PatientCommand {
   static addPatient(lastName, firstName) {
@@ -13,33 +14,23 @@ class PatientCommand {
       creationDate: new Date(),
     });
 
-    patientCache[id] = {
-      id: patient.id,
-      lastName: patient.lastName,
-      firstName: patient.firstName,
-      creationDate: patient.creationDate,
-      name: `${patient.firstName} ${patient.lastName}`,
-    };
-
+    addEvent('patientAdded', id, patient);
     console.log(patient);
   }
+
 
   static savePatient(id, lastName, firstName) {
     const existingPatient = PatientDAO.retrievePatient(id);
 
     if (existingPatient) {
-      patientCache[id] = {
-        ...existingPatient,
+      addEvent('patientSaved', id, {
+        id,
         lastName,
         firstName,
-        name: `${firstName} ${lastName}`,
-      };
-
-      PatientDAO.updatePatient({
-        ...existingPatient,
-        lastName,
-        firstName,
+        creationDate: existingPatient.creationDate,
       });
+
+      // ... (supprimer l'appel à la fonction updatePatient)
     } else {
       console.error('Patient not found for save');
     }

@@ -1,10 +1,10 @@
+// patientDAO.js
 const database = require('./database');
 const Patient = require('./patient');
 
-class PatientQueryDAO {
+class PatientDAO {
   static insertPatient(patient) {
     database.patients.push(patient);
-    console.log('Patient inserted:', patient);
   }
 
   static retrievePatient(id) {
@@ -21,6 +21,17 @@ class PatientQueryDAO {
 
     return null;
   }
+
+  static updatePatient(updatedPatient) {
+    const index = database.patients.findIndex(patient => patient.id === updatedPatient.id);
+
+    if (index !== -1) {
+      database.patients[index] = { ...database.patients[index], ...updatedPatient };
+      console.log('Patient updated:', database.patients[index]);
+    } else {
+      console.error('Patient not found for update');
+    }
+  }
 }
 
-module.exports = PatientQueryDAO;
+module.exports = PatientDAO;
