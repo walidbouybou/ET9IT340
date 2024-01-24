@@ -1,0 +1,29 @@
+  /* fichier header.css */
+  @keyframes font-slide {
+    from {
+      text-align: start;
+    }
+
+    50% {
+      text-align: center;
+    }
+
+    to {
+      text-align: end;
+    }
+  }
+
+  .header {
+    padding: 2em;
+    border: 2px solid green;
+    color: green;
+    font-size: min(2em, 80px);
+    height: 5rem;
+    width: 50%;
+    animation: font-slide 2s linear infinite; /* Ajouter l'animation */
+
+    /* Désactiver l'animation si prefers-reduced-motion est activé */
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }

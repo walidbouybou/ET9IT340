@@ -1,0 +1,8 @@
+    .header {
+        padding: 2em;
+        border: 2px solid green;
+        color: green;
+        font-size: min(2em, 80px);
+        height: 5rem;
+        width: 50%; 
+      }
